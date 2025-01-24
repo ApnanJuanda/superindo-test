@@ -1,0 +1,479 @@
+{
+	"info": {
+		"_postman_id": "149064d1-7853-4f8e-a9e5-afa7227a1abe",
+		"name": "API Product",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12118444"
+	},
+	"item": [
+		{
+			"name": "Add Product",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Bayam\",\r\n    \"price\": 5000,\r\n    \"productType\": \"Sayuran\",\r\n    \"expiredDate\": \"25-01-2025\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/product",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"product"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success - Add Product",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Brokoli\",\r\n    \"price\": 11000,\r\n    \"productType\": \"Sayuran\",\r\n    \"expiredDate\": \"27-01-2025\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/product",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"product"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 24 Jan 2025 15:39:18 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "90"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 3,\n    \"name\": \"Brokoli\",\n    \"price\": 11000,\n    \"productType\": \"Sayuran\",\n    \"expiredDate\": \"27-01-2025\"\n}"
+				},
+				{
+					"name": "Failed - Add Product",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Bayam 2\",\r\n    \"price\": 60000,\r\n    \"productType\": \"Sayuran\",\r\n    \"expiredDate\": \"23-01-2025\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/product",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"product"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 24 Jan 2025 16:51:41 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "37"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Data produk tidak valid\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get All Products",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/product",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"product"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success - Get All Products",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/product",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"product"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 24 Jan 2025 15:44:12 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "273"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 1,\n        \"name\": \"Bayam\",\n        \"price\": 5000,\n        \"productType\": \"Sayuran\",\n        \"expiredDate\": \"25-01-2025\"\n    },\n    {\n        \"id\": 3,\n        \"name\": \"Brokoli\",\n        \"price\": 11000,\n        \"productType\": \"Sayuran\",\n        \"expiredDate\": \"27-01-2025\"\n    },\n    {\n        \"id\": 2,\n        \"name\": \"Ikan tuna\",\n        \"price\": 60000,\n        \"productType\": \"Protein\",\n        \"expiredDate\": \"27-01-2025\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Get Product By Id Name",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Bayam\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/product/search/1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"product",
+						"search",
+						"1"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success - Get Product By Id Name",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Ikan tuna\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/product/search/2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"product",
+								"search",
+								"2"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 24 Jan 2025 15:45:42 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "94"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 2,\n        \"name\": \"Ikan tuna\",\n        \"price\": 60000,\n        \"productType\": \"Protein\",\n        \"expiredDate\": \"27-01-2025\"\n    }\n]"
+				},
+				{
+					"name": "Failed - Get Product",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Ikan tunaa\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/product/search/30",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"product",
+								"search",
+								"30"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 24 Jan 2025 16:53:14 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "42"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Maaf, Produk tidak ditemukan\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get Product By Type",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/product/type/Sayuran",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"product",
+						"type",
+						"Sayuran"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success - Get Product By Type",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/product/type/Sayuran",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"product",
+								"type",
+								"Sayuran"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 24 Jan 2025 15:46:07 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "180"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 1,\n        \"name\": \"Bayam\",\n        \"price\": 5000,\n        \"productType\": \"Sayuran\",\n        \"expiredDate\": \"25-01-2025\"\n    },\n    {\n        \"id\": 3,\n        \"name\": \"Brokoli\",\n        \"price\": 11000,\n        \"productType\": \"Sayuran\",\n        \"expiredDate\": \"27-01-2025\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Get Sorted Product",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/product/sorting/date_asc",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"product",
+						"sorting",
+						"date_asc"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success - Get Sorted Product",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/product/sorting/date_asc",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"product",
+								"sorting",
+								"date_asc"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 24 Jan 2025 15:46:27 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "273"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 1,\n        \"name\": \"Bayam\",\n        \"price\": 5000,\n        \"productType\": \"Sayuran\",\n        \"expiredDate\": \"25-01-2025\"\n    },\n    {\n        \"id\": 3,\n        \"name\": \"Brokoli\",\n        \"price\": 11000,\n        \"productType\": \"Sayuran\",\n        \"expiredDate\": \"27-01-2025\"\n    },\n    {\n        \"id\": 2,\n        \"name\": \"Ikan tuna\",\n        \"price\": 60000,\n        \"productType\": \"Protein\",\n        \"expiredDate\": \"27-01-2025\"\n    }\n]"
+				}
+			]
+		}
+	]
+}
