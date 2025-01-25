@@ -110,17 +110,18 @@ func (r *ProductRepositoryImpl) GetByIdOrName(id int, name string) ([]*model.Pro
 	if id > 0 || name != "" {
 		products, _ = r.GetByIdOrNameFromRedis(id, name)
 		if products == nil {
-			if name != "" {
-				err := r.DB.Find(&products, "name = ?", name).Error
-				helper.PanicIfError(err)
-			} else if id > 0 {
+			if id > 0 {
 				err := r.DB.Find(&products, "id = ?", id).Error
 				helper.PanicIfError(err)
 			}
 
-			if len(products) > 0 {
-				r.saveToRedis(products)
+			if len(products) <= 0 && name != "" {
+				err := r.DB.Find(&products, "name = ?", name).Error
+				helper.PanicIfError(err)
 			}
+		}
+		if len(products) > 0 {
+			r.saveToRedis(products)
 		}
 	}
 
@@ -132,7 +133,23 @@ func (r *ProductRepositoryImpl) GetByIdOrName(id int, name string) ([]*model.Pro
 
 func (r *ProductRepositoryImpl) GetByIdOrNameFromRedis(id int, name string) ([]*model.Product, error) {
 	var products []*model.Product
-	if name != "" {
+	if id > 0 {
+		var productKey = fmt.Sprintf("product:%d", id)
+		productData, err := r.RedisDB.Get(ctx, productKey).Result()
+		if err != nil {
+			return nil, err
+		}
+
+		var product model.Product
+		err = json.Unmarshal([]byte(productData), &product)
+		if err != nil {
+			return nil, err
+		}
+
+		products = append(products, &product)
+	}
+
+	if len(products) <= 0 && name != "" {
 		var productsFilter []*model.Product
 
 		products, _ = r.getAllProductsFromRedis()
@@ -148,21 +165,8 @@ func (r *ProductRepositoryImpl) GetByIdOrNameFromRedis(id int, name string) ([]*
 		} else {
 			return nil, errors.New("Produk tidak ditemukan")
 		}
-	} else if id > 0 {
-		var productKey = fmt.Sprintf("product:%d", id)
-		productData, err := r.RedisDB.Get(ctx, productKey).Result()
-		if err != nil {
-			return nil, err
-		}
-
-		var product model.Product
-		err = json.Unmarshal([]byte(productData), &product)
-		if err != nil {
-			return nil, err
-		}
-
-		products = append(products, &product)
 	}
+
 	return products, nil
 }
 
