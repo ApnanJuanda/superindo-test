@@ -32,8 +32,11 @@ func NewDB() *gorm.DB {
 }
 
 func NewRedisDB() *redis.Client {
+	redisInfo := fmt.Sprintf("%s:%s",
+		os.Getenv("MYHOST"),
+		os.Getenv("RSPORT"))
 	var redisDB = redis.NewClient(&redis.Options{
-		Addr: "localhost:6379",
+		Addr: redisInfo,
 		DB:   0,
 	})
 	return redisDB
